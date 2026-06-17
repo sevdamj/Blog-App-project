@@ -1,0 +1,148 @@
+@import "tailwindcss";
+@import "./font.css";
+
+:root {
+  --primary-50: oklch(0.85 0.08 255);
+  --primary-100: oklch(0.7 0.12 255);
+  --primary-200: oklch(0.55 0.16 255);
+  --primary-300: oklch(0.4 0.18 255);
+
+  --secondary-50: oklch(0.97 0.01 260);
+  --secondary-100: oklch(66.566% 0.01594 264.5);
+  --secondary-200: oklch(31.091% 0.04034 258.837);
+  --secondary-300: oklch(22.741% 0.04905 259.868);
+  --secondary-400: oklch(17.178% 0.03975 264.005);
+
+  --success: oklch(0.62 0.18 145);
+  --error: oklch(0.58 0.2 28);
+  --warning: oklch(0.7 0.17 75);
+
+  --color-background: var(--secondary-50);
+  --color-surface: var(--secondary-400);
+  --color-border: var(--secondary-100);
+
+  --mesh-color-1: oklch(42.954% 0.18989 315.374 / 0.8);
+  --mesh-color-2: oklch(0.45 0.32 255 / 0.75);
+  --mesh-color-3: oklch(0.65 0.25 260 / 0.7);
+  --mesh-color-4: oklch(42.735% 0.29472 264.243 / 0.85);
+  --mesh-color-5: oklch(64.804% 0.29464 320.592 / 0.8);
+  --mesh-blend-mode: overlay;
+}
+
+.dark {
+  --primary-50: oklch(0.55 0.2 255);
+  --primary-100: oklch(0.7 0.12 255);
+  --primary-200: oklch(0.85 0.08 255);
+  --primary-300: oklch(0.95 0.02 255);
+
+  --secondary-50: oklch(0.15 0.03 260);
+  --secondary-100: oklch(31.404% 0.06291 260.328);
+  --secondary-200: oklch(0.25 0.04 260);
+  --secondary-300: oklch(78.111% 0.00551 248.266);
+  --secondary-400: oklch(0.97 0.01 260);
+
+  --color-background: var(--secondary-50);
+  --color-surface: var(--secondary-400);
+  --color-border: var(--secondary-300);
+
+  --mesh-color-1: oklch(51% 0.21888 261.098 / 0.544);
+  --mesh-color-2: oklch(43.463% 0.13548 289.743 / 0.309);
+  --mesh-color-3: oklch(38.567% 0.18129 312.997 / 0.354);
+  --mesh-color-4: oklch(19.866% 0.13024 268.066 / 0.66);
+  --mesh-color-5: oklch(57.625% 0.23041 271.448 / 0.431);
+  --mesh-blend-mode: screen;
+}
+
+@theme {
+  --font-sans: var(--font-vazir), system-ui, -apple-system, sans-serif;
+
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+
+  --color-secondary-50: var(--secondary-50);
+  --color-secondary-100: var(--secondary-100);
+  --color-secondary-200: var(--secondary-200);
+  --color-secondary-300: var(--secondary-300);
+
+  --color-success: var(--success);
+  --color-error: var(--error);
+
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --secondary-300: var(--secondary-300);
+  --secondary-200: var(--secondary-300-light);
+  --color-border: var(--color-border);
+}
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--secondary-300);
+  font-family: var(--font-sans);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-secondary-200);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-300);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-200);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* scrollbar:  */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--color-border);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-primary-300);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-200);
+}

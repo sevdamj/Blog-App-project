@@ -1,0 +1,13 @@
+.clipCut {
+  transition: all 0.4s ease-in-out;
+  clip-path: polygon(
+    0% 0%,
+    38% 0%,
+    42% 20px,
+    58% 20px,
+    62% 0%,
+    100% 0%,
+    100% 100%,
+    0% 100%
+  );
+}

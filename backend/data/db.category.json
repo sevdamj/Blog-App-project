@@ -1,0 +1,72 @@
+[
+            {
+                "_id": "677cac49762ef9a412d41ee2",
+                "title": "ورزشی",
+                "englishTitle": "sport",
+                "description": "مقالات ورزشی",
+                "slug": "sport",
+                "createdAt": "2025-01-07T04:23:37.648Z",
+                "updatedAt": "2025-01-07T04:23:37.648Z",
+                "__v": 0
+            },
+            {
+                "_id": "6781bc7261404991a2654540",
+                "title": "فرهنگی",
+                "englishTitle": "cultural",
+                "description": "مقالات فرهنگی",
+                "slug": "cultural",
+                "createdAt": "2025-01-11T00:33:54.524Z",
+                "updatedAt": "2025-01-11T00:33:54.524Z",
+                "__v": 0
+            },
+            {
+                "_id": "6781bc8c61404991a2654545",
+                "title": "اقتصادی",
+                "englishTitle": "economic",
+                "description": "مقالات اقتصادی",
+                "slug": "economic",
+                "createdAt": "2025-01-11T00:34:20.890Z",
+                "updatedAt": "2025-01-11T00:34:20.890Z",
+                "__v": 0
+            },
+            {
+                "_id": "6781bca161404991a265454a",
+                "title": "برنامه نویسی",
+                "englishTitle": "programming",
+                "description": "برنامه نویسی",
+                "slug": "programming",
+                "createdAt": "2025-01-11T00:34:41.617Z",
+                "updatedAt": "2025-01-11T00:34:41.617Z",
+                "__v": 0
+            },
+            {
+                "_id": "6781bcb061404991a265454e",
+                "title": "سیاسی",
+                "englishTitle": "political",
+                "description": "سیاسی",
+                "slug": "political",
+                "createdAt": "2025-01-11T00:34:56.803Z",
+                "updatedAt": "2025-01-11T00:34:56.803Z",
+                "__v": 0
+            },
+            {
+                "_id": "6781bcbe61404991a2654552",
+                "title": "تاریخی",
+                "englishTitle": "historical",
+                "description": "تاریخی",
+                "slug": "historical",
+                "createdAt": "2025-01-11T00:35:10.998Z",
+                "updatedAt": "2025-01-11T00:35:10.998Z",
+                "__v": 0
+            },
+            {
+                "_id": "6781bcce61404991a2654556",
+                "title": "جغرافیا",
+                "englishTitle": "geographic",
+                "description": "جغرافیا",
+                "slug": "geographic",
+                "createdAt": "2025-01-11T00:35:26.144Z",
+                "updatedAt": "2025-01-11T00:35:26.144Z",
+                "__v": 0
+            }
+]
