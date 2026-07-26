@@ -12,3 +12,11 @@ export interface CetegoryRowProps {
   category: Category;
   index: number;
 }
+
+export type CategoryId = string | number;
+
+export interface CategoryData {
+  title: string;
+  englishTitle: string;
+  description?: string;
+}

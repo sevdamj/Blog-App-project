@@ -90,7 +90,7 @@ function SigninForm() {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-1 flex-1 mb-6">
-        <RHFTextField
+       <RHFTextField<SigninData>
           isRequired
           name="email"
           label="ایمیل"
@@ -100,7 +100,7 @@ function SigninForm() {
           placeholder="info@example.com"
         />
 
-        <RHFTextField
+       <RHFTextField<SigninData>
           name="password"
           label="رمز عبور"
           register={register}

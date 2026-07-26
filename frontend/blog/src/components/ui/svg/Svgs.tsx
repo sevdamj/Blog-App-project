@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 export default function Svgs({
-    src=""
+    src='',
     alt = '',
     className = '',
     width = 150, 

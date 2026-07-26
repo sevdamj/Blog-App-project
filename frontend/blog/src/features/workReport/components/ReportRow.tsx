@@ -4,16 +4,7 @@ import Button from "@/components/ui/Button";
 import Table from "@/ui/Table";
 import { toPersianDigits } from "@/utils/numberFormatter";
 import { Notebook } from "lucide-react";
-
-interface UserWithStats {
-  _id: string;
-  name: string;
-  email: string;
-  createdAt: string;
-  likesCount: number;
-  bookmarksCount: number;
-  commentsCount: number;
-}
+import { UserWithStats } from "../types/report";
 
 function ReportRowContent({ user, index }: { user: UserWithStats; index: number }) {
   return (
@@ -36,7 +27,6 @@ export default function ReportRow({ users }: { users: UserWithStats[] }) {
       return;
     }
 
-    // ساخت HTML برای چاپ
     const printContent = `
       <!DOCTYPE html>
       <html dir="rtl">
@@ -111,7 +101,6 @@ export default function ReportRow({ users }: { users: UserWithStats[] }) {
       </html>
     `;
 
-    // باز کردن پنجره جدید و چاپ
     const printWindow = window.open('', '_blank');
     if (printWindow) {
       printWindow.document.write(printContent);

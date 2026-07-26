@@ -1,7 +1,6 @@
-// src/components/ui/RHFTextField.tsx
-import { FieldError, UseFormRegister, Path, FieldErrors } from "react-hook-form";
+import { FieldError, UseFormRegister, Path, FieldErrors, FieldValues } from "react-hook-form";
 
-interface RHFTextFieldProps<TFormValues extends Record<string, unknown>> {
+interface RHFTextFieldProps<TFormValues extends FieldValues> {
   name: Path<TFormValues>;
   label: string;
   register: UseFormRegister<TFormValues>;
@@ -13,7 +12,7 @@ interface RHFTextFieldProps<TFormValues extends Record<string, unknown>> {
   className?: string;
 }
 
-export default function RHFTextField<TFormValues extends Record<string, unknown>>({
+export default function RHFTextField<TFormValues extends FieldValues>({
   name,
   label,
   register,
