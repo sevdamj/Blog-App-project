@@ -11,7 +11,7 @@ function Header() {
   const { user } = useAuthStore();
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   
-  const userData = user?.user?.name ||  null;
+  const userData = user?.name || null;
 
   return (
     <header>

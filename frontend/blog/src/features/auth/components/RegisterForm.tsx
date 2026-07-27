@@ -23,7 +23,7 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 
 function RegisterForm() {
   const router = useRouter();
-  const { signup, isLoading, refreshUser } = useAuthStore(); // اضافه کردن refreshUser
+  const { signup, isLoading, refreshUser } = useAuthStore();
 
   const {
     register,
@@ -37,19 +37,24 @@ function RegisterForm() {
 
   const onSubmit = async (values: RegisterFormValues) => {
     try {
-      const res = await signup(values);
-      toast.success(res?.message || "ثبت‌نام با موفقیت انجام شد.");
-      
+      await signup(values);
+      toast.success("ثبت‌نام با موفقیت انجام شد.");
+
       // مهم: اطلاعات کاربر رو از سرور دوباره بگیر
       await refreshUser();
-      
+
       // صفحه رو رفرش کن
       router.refresh();
-      
+
       // برو به پروفایل
       router.push("/profile");
     } catch (err: unknown) {
-      const error = err as { response?: { status?: number; data?: { message?: string; errors?: Record<string, string[]> } } };
+      const error = err as {
+        response?: {
+          status?: number;
+          data?: { message?: string; errors?: Record<string, string[]> };
+        };
+      };
       if (error.response?.status === 422) {
         const serverErrors = error.response.data?.errors;
         if (serverErrors) {
@@ -75,7 +80,9 @@ function RegisterForm() {
         <h1 className="text-2xl font-black text-surface/70 mb-2">
           ایجاد حساب کاربری
         </h1>
-        <p className="text-secondary-400 text-sm">برای عضویت، اطلاعات زیر را وارد کنید</p>
+        <p className="text-secondary-400 text-sm">
+          برای عضویت، اطلاعات زیر را وارد کنید
+        </p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -87,7 +94,7 @@ function RegisterForm() {
           errors={errors}
           placeholder="مثلا: سودا مهدیزاده"
         />
-        
+
         <RHFTextField<RegisterFormValues>
           isRequired
           name="email"
@@ -97,7 +104,7 @@ function RegisterForm() {
           type="email"
           placeholder="info@example.com"
         />
-        
+
         <RHFTextField<RegisterFormValues>
           isRequired
           name="password"

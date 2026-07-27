@@ -1,8 +1,6 @@
 import http from "@/services/httpService";
 import type { AxiosRequestConfig } from "axios";
-
-type CategoryId = string | number;
-type CategoryData = Record<string, unknown>;
+import type { CategoryId, CategoryData } from "../types/category";
 
 export async function getCategoryApi(options?: AxiosRequestConfig) {
   return http
@@ -37,4 +35,3 @@ export async function editCategoryApi({
 export async function createCategoryApi(data: CategoryData) {
   return http.post(`/category/add`, data).then(({ data }) => data.data);
 }
-

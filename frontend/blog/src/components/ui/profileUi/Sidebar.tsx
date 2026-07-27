@@ -6,7 +6,11 @@ import SideBarNavs from "./SideBarNavs";
 import { useAuthStore } from "@/features/auth/store/useAuthStore";
 import Button from "../Button";
 
-function SideBar() {
+interface SideBarProps {
+  onClose?: () => void;
+}
+
+function SideBar({ onClose }: SideBarProps) {
   const { logout } = useAuthStore();
 
   const logoutHandler = async () => {
@@ -19,6 +23,7 @@ function SideBar() {
       <div className="flex items-center w-full mb-6 pb-1 border-b border-b-surface/50">
         <Link
           href="/"
+          onClick={onClose}
           className="flex items-center gap-x-2 justify-center pb-2 mb-1"
         >
           <Home className="w-6 h-6" />

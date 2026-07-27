@@ -3,7 +3,6 @@ import type { AxiosRequestConfig } from "axios";
 import type { Post } from "../types/post";
 
 type PostId = string | number;
-type PostData = Record<string, unknown>;
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -20,7 +19,6 @@ export async function getPostBySlug(slug: string): Promise<Post | undefined> {
   const { data } = await res.json();
   const { post } = data || {};
   
-  // اصلاح آدرس عکس
   if (post?.coverImageUrl) {
     post.coverImageUrl = getFullImageUrl(post.coverImageUrl);
   }
@@ -37,7 +35,6 @@ export async function getPosts(
   const { data } = await res.json();
   const { posts = [] } = data || {};
   
-  // اصلاح آدرس عکس برای همه پست‌ها
   const fixedPosts = posts.map((post: Post) => ({
     ...post,
     coverImageUrl: getFullImageUrl(post.coverImageUrl),
@@ -58,12 +55,12 @@ export async function getPostById(id: PostId, options?: AxiosRequestConfig) {
   return post;
 }
 
-export async function createPostApi(data: PostData) {
+export async function createPostApi(data: FormData) {
   const { data: resData } = await http.post(`/post/create`, data);
   return resData.data;
 }
 
-export async function editPostApi({ id, data }: { id: PostId; data: PostData }) {
+export async function editPostApi(id: PostId, data: FormData) {
   const { data: resData } = await http.patch(`/post/update/${id}`, data);
   return resData.data;
 }

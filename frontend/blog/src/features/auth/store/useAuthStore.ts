@@ -21,8 +21,8 @@ interface AuthState extends AuthPersistedState {
 
 interface AuthActions {
   setHasHydrated: (state: boolean) => void;
-  signin: (values: SigninData) => Promise<unknown>;
-  signup: (values: SignupData) => Promise<unknown>;
+  signin: (values: SigninData) => Promise<{ user: User; message: string }>;
+  signup: (values: SignupData) => Promise<User>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
   getUserDisplayName: () => string;

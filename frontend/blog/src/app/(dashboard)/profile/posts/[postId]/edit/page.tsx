@@ -27,10 +27,19 @@ async function EditPage({ params }: EditPageProps) {
     notFound();
   }
 
+  // تبدیل category به رشته، چه آبجکت باشه چه رشته
+  const normalizedPost = {
+    ...post,
+    category:
+      typeof post.category === "object" && post.category !== null
+        ? String(post.category._id)
+        : post.category,
+  };
+
   return (
     <div>
       <Breadcrumb items={breadcrumbItems} />
-      <CreatePostForm postToEdit={post} />
+      <CreatePostForm postToEdit={normalizedPost} />
     </div>
   );
 }

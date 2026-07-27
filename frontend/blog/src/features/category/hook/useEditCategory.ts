@@ -1,26 +1,35 @@
 import { editCategoryApi } from "@/features/category/api/categoryServices";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { Category } from "../types/category";
+import { CategoryId, CategoryData } from "../types/category";
 
 interface ApiResponse {
   message: string;
-  data?: any;
+  data?: unknown;
+}
+
+interface ErrorResponse {
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
+  message?: string;
+}
+
+interface EditCategoryParams {
+  id: CategoryId;
+  data: CategoryData;
 }
 
 interface UseEditCategoryReturn {
   isEditing: boolean;
-  editCategory: (data: Category, options?: any) => void;
+  editCategory: (params: EditCategoryParams, options?: { onSuccess?: () => void }) => void;
 }
 
 export default function useEditCategory(): UseEditCategoryReturn {
   const queryClient = useQueryClient();
-
-  const { isPending: isEditing, mutate: editCategory } = useMutation<
-    ApiResponse,
-    any,
-    Category
-  >({
+  const mutation = useMutation<ApiResponse, ErrorResponse, EditCategoryParams>({
     mutationFn: editCategoryApi,
     onSuccess: (data) => {
       toast.success(data.message);
@@ -28,8 +37,9 @@ export default function useEditCategory(): UseEditCategoryReturn {
         queryKey: ["categories"],
       });
     },
-    onError: (err: any) => toast.error(err?.response?.data?.message),
+    onError: (err: ErrorResponse) =>
+      toast.error(err?.response?.data?.message || err?.message || "خطا در ویرایش دسته‌بندی"),
   });
 
-  return { isEditing, editCategory };
+  return { isEditing: mutation.isPending, editCategory: mutation.mutate };
 }

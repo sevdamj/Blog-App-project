@@ -1,5 +1,6 @@
 import { AuthorType } from "@/features/auth/types/user";
 import { Category } from "@/features/category/types/category";
+import { CommentType } from "@/features/comments/types/comment";
 
 export interface Post {
   _id: string;
@@ -15,7 +16,7 @@ export interface Post {
   updatedAt?: string;
   author: AuthorType;
   category?: string | Category;
-  comments: Comment[]; 
+  comments: CommentType[];  
   commentsCount?: number;
   likesCount?: number;
   isLiked?: boolean;

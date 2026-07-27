@@ -6,12 +6,7 @@ import ReportRow from "./ReportRow";
 import { getAllUsersApi } from "@/features/auth/api/authService";
 import { getCommentsApi } from "@/features/comments/api/commentService";
 import { User } from "@/features/auth/types/user";
-
-interface UserWithStats extends User {
-  likesCount: number;
-  bookmarksCount: number;
-  commentsCount: number;
-}
+import { UserWithStats } from "../types/report";
 
 function ReportTable() {
   const [users, setUsers] = useState<UserWithStats[]>([]);
@@ -46,13 +41,14 @@ function ReportTable() {
           }
         });
         
-        const usersWithStats = usersList.map((user: User) => {
+        const usersWithStats: UserWithStats[] = usersList.map((user: User) => {
           const likesCount = user.likedPosts?.length || 0;
           const bookmarksCount = user.bookmarkedPosts?.length || 0;
           const commentsCount = commentsCountMap.get(user._id) || 0;
           
           return {
             ...user,
+            createdAt: user.createdAt || new Date().toISOString(),
             likesCount,
             bookmarksCount,
             commentsCount,
@@ -92,7 +88,6 @@ function ReportTable() {
     return <Empty resourceName="گزارشی" />;
   }
 
-  // ✅ فقط کافیه ReportRow رو با users صدا بزنی
   return <ReportRow users={users} />;
 }
 
