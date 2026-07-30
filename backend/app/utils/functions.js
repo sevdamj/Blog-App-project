@@ -56,11 +56,10 @@ function generateToken(user, expiresIn, secret) {
 async function setAccessToken(res, user) {
   const cookieOptions = {
     maxAge: 1000 * 60 * 60 * 24 * 1, // would expire after 1 days
-    httpOnly: true, // The cookie only accessible by the web server
-    signed: true, // Indicates if the cookie should be signed
-    sameSite: "Lax",
+    httpOnly: true,
+    signed: true,
+    sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
     secure: process.env.NODE_ENV === "development" ? false : true,
-    domain: process.env.DOMAIN,
   };
   res.cookie(
     "accessToken",
@@ -72,11 +71,10 @@ async function setAccessToken(res, user) {
 async function setRefreshToken(res, user) {
   const cookieOptions = {
     maxAge: 1000 * 60 * 60 * 24 * 365, // would expire after 1 year
-    httpOnly: true, // The cookie only accessible by the web server
-    signed: true, // Indicates if the cookie should be signed
-    sameSite: "Lax",
+    httpOnly: true,
+    signed: true,
+    sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
     secure: process.env.NODE_ENV === "development" ? false : true,
-    domain: process.env.DOMAIN,
   };
   res.cookie(
     "refreshToken",

@@ -157,26 +157,26 @@ class UserAuthController extends Controller {
     const user = await UserModel.findOne({ email });
     return user;
   }
-  logout(req, res) {
-    const cookieOptions = {
-      maxAge: 1,
-      expires: Date.now(),
-      httpOnly: true,
-      signed: true,
-      sameSite: "Lax",
-      secure: true,
-      path: "/",
-      domain: process.env.DOMAIN,
-    };
-    res.cookie("accessToken", null, cookieOptions);
-    res.cookie("refreshToken", null, cookieOptions);
 
-    return res.status(HttpStatus.OK).json({
-      StatusCode: HttpStatus.OK,
-      auth: false,
-      message: "با موفقیت از حساب کاربری خود خارج شدید",
-    });
-  }
+  logout(req, res) {
+  const cookieOptions = {
+    maxAge: 1,
+    expires: Date.now(),
+    httpOnly: true,
+    signed: true,
+    sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
+    secure: process.env.NODE_ENV === "development" ? false : true,
+    path: "/",
+  };
+  res.cookie("accessToken", null, cookieOptions);
+  res.cookie("refreshToken", null, cookieOptions);
+
+  return res.status(HttpStatus.OK).json({
+    StatusCode: HttpStatus.OK,
+    auth: false,
+    message: "با موفقیت از حساب کاربری خود خارج شدید",
+  });
+}
 
   // متد جدید برای گرفتن آمار کاربر
   async getUserStats(req, res) {
