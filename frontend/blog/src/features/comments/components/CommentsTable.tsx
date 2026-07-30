@@ -3,23 +3,29 @@ import Table from "@/ui/Table";
 import CommentRow from "./CommentRow";
 import { getCommentsApi } from "../api/commentService";
 import { CommentType } from "../types/comment";
+import { headers } from "next/headers";
 
 interface CommentsTableProps {
-  initialComments?: CommentType[]; // برای SSR/ISR
-  revalidateTime?: number; // زمان بازتایید (بر حسب ثانیه)
+  initialComments?: CommentType[];
 }
-export const revalidate = 60; // بازتایید هر 60 ثانیه (اختیاری)
 
 async function CommentsTable({ initialComments }: CommentsTableProps) {
   let comments: CommentType[] = [];
   let error = null;
 
   try {
-    // اگر initialComments وجود دارد از آن استفاده کن (برای SSR)
     if (initialComments) {
       comments = initialComments;
     } else {
-      const response = await getCommentsApi();
+      const headersList = await headers();
+      const cookieHeader = headersList.get("cookie") || "";
+
+      const response = await getCommentsApi({
+        headers: {
+          Cookie: cookieHeader,
+        },
+        withCredentials: true,
+      });
       comments = response.comments || [];
     }
   } catch (err) {
@@ -36,7 +42,6 @@ async function CommentsTable({ initialComments }: CommentsTableProps) {
     );
   }
 
-  // نمایش حالت خالی
   if (!comments || comments.length === 0) {
     return <Empty resourceName="کامنتی" />;
   }

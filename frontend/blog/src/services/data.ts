@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { getCommentsApi } from "@/features/comments/api/commentService";
 import { getPosts } from "@/features/blogs/api/postServices";
-import { getAllUsersApi } from "features/auth/api/authService";
+import { getAllUsersApi } from "@/features/auth/api/authService";
 
 interface UsersResponse {
   users?: Array<unknown>;

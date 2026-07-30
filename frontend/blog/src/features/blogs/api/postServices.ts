@@ -15,7 +15,7 @@ function getFullImageUrl(url?: string): string | undefined {
 
 // ==================== API Functions ====================
 export async function getPostBySlug(slug: string): Promise<Post | undefined> {
-  const res = await fetch(`${BASE_URL}/post/slug/${slug}`);
+  const res = await fetch(`${BASE_URL}/post/slug/${slug}`, { cache: "no-store" });
   const { data } = await res.json();
   const { post } = data || {};
   
@@ -31,7 +31,7 @@ export async function getPosts(
   options?: RequestInit
 ): Promise<{ posts: Post[] }> {
   const url = `${BASE_URL}/post/list${queries ? `?${queries}` : ""}`;
-  const res = await fetch(url, options);
+  const res = await fetch(url, { ...options, cache: "no-store" });
   const { data } = await res.json();
   const { posts = [] } = data || {};
   

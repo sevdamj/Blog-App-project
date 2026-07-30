@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import SpinnerMini from "@/components/ui/SpinnerMini";
 import CommentsTable from "@/features/comments/components/CommentsTable";
 
+export const dynamic = "force-dynamic";
+
 function page() {
   return (
     <div>

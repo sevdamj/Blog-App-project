@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import SpinnerMini from "@/components/ui/SpinnerMini";
 import ReportTable from "@/features/workReport/components/ReportTable";
 
+export const dynamic = "force-dynamic";
+
 async function page() {
   return (
     <div>

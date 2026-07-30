@@ -3,6 +3,8 @@ import SpinnerMini from "@/components/ui/SpinnerMini";
 import { CreateCategory } from "@/features/category/ui/Buttons";
 import CategoryTable from "@/features/category/components/CategoryTable";
 
+export const dynamic = "force-dynamic";
+
 function page() {
   return (
     <div>

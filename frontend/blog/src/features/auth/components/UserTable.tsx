@@ -2,27 +2,20 @@ import Empty from "@/ui/Empty";
 import Table from "@/ui/Table";
 import UserRow from "./UserRow";
 import { getAllUsersApi } from "@/features/auth/api/authService";
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 import { User } from "@/features/auth/types/user";
-
-// تابع کمکی برای گرفتن کوکی استرینگ
-async function getCookieString() {
-  const cookieStore = await cookies();
-  return cookieStore.getAll()
-    .map(cookie => `${cookie.name}=${cookie.value}`)
-    .join('; ');
-}
 
 async function UsersTable() {
   let users: User[] = [];
   let error = null;
 
   try {
-    const cookieString = await getCookieString();
-    
+    const headersList = await headers();
+    const cookieHeader = headersList.get("cookie") || "";
+
     const response = await getAllUsersApi({
       headers: {
-        Cookie: cookieString,
+        Cookie: cookieHeader,
       },
       withCredentials: true,
     });
