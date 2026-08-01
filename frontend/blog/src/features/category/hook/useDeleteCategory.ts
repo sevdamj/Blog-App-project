@@ -1,6 +1,7 @@
 import { deleteCategoryApi } from "@/features/category/api/categoryServices";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface DeleteCategoryParams {
   id: string;
@@ -10,17 +11,30 @@ interface ApiResponse {
   message: string;
 }
 
+interface ErrorResponse {
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
+  message?: string;
+}
+
 interface UseDeleteCategoryReturn {
   isDeleting: boolean;
-  deleteCategory: (params: DeleteCategoryParams, options?: any) => void;
+  deleteCategory: (
+    params: DeleteCategoryParams,
+    options?: { onSuccess?: () => void }
+  ) => void;
 }
 
 export default function useDeleteCategory(): UseDeleteCategoryReturn {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const { isPending: isDeleting, mutate: deleteCategory } = useMutation<
     ApiResponse,
-    any,
+    ErrorResponse,
     DeleteCategoryParams
   >({
     mutationFn: deleteCategoryApi,
@@ -29,8 +43,10 @@ export default function useDeleteCategory(): UseDeleteCategoryReturn {
       queryClient.invalidateQueries({
         queryKey: ["categories"],
       });
+      router.refresh();
     },
-    onError: (err: any) => toast.error(err?.response?.data?.message),
+    onError: (err: ErrorResponse) =>
+      toast.error(err?.response?.data?.message || err?.message || "خطا در حذف دسته‌بندی"),
   });
 
   return { isDeleting, deleteCategory };

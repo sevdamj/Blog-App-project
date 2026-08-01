@@ -116,7 +116,7 @@ const AboutUs = () => {
           <div className="w-24 h-1 bg-primary-100 mx-auto mt-2 rounded-full"></div>
         </div>
       </header>
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 space-y-18 md:space-y-23">
+      <div className="mx-auto px-4 sm:px-4 lg:px-6 space-y-18 md:space-y-23">
         {/* بخش معرفی */}
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-6">

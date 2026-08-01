@@ -19,15 +19,6 @@ const categorySchema = z.object({
 
 type CategoryFormData = z.infer<typeof categorySchema>;
 
-// interface CreateCategoryFormProps {
-//   categoryToEdit?: {
-//     _id: string;
-//     title: string;
-//     englishTitle: string;
-//     description: string;
-//   } | null;
-// }
-
 interface CreateCategoryFormProps {
   categoryToEdit?: Category;
 }

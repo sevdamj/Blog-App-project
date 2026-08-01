@@ -17,15 +17,22 @@ async function UsersTable() {
       headers: {
         Cookie: cookieHeader,
       },
-      withCredentials: true,
     });
     
     users = response.users || [];
-  } catch (err) {
-    console.error("خطا در دریافت کاربران:", err);
-    error = err;
-    users = [];
   }
+  //  catch (err) {
+  //   console.error("خطا در دریافت کاربران:", err);
+  //   error = err;
+  //   users = [];
+  // }
+  catch (err: any) {
+  console.error("Status:", err?.response?.status);
+  console.error("Data:", err?.response?.data);
+  console.error("Message:", err?.message);
+  error = err;
+  users = [];
+}
 
   if (error) {
     return (

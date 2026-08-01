@@ -47,7 +47,7 @@ function SigninForm() {
           await refreshUser();
     
     router.refresh();
-      router.push("/profile");
+      router.push("/");
     } catch (err) {
       const error = err as ServerError;
       if (error.response?.status === 422) {
