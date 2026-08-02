@@ -16,7 +16,7 @@ import Link from "next/link";
 const registerSchema = z.object({
   name: z.string().min(5, "حداقل ۵ کاراکتر").max(50, "حداکثر ۵۰ کاراکتر"),
   email: z.string().email("ایمیل نامعتبر است"),
-  password: z.string().min(6, "رمز عبور باید حداقل ۶ کاراکتر باشد"),
+  password: z.string().min(8, "رمز عبور باید حداقل ۸ کاراکتر باشد"),
 });
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
@@ -47,7 +47,7 @@ function RegisterForm() {
       router.refresh();
 
       // برو به پروفایل
-      router.push("/profile");
+      router.push("/");
     } catch (err: unknown) {
       const error = err as {
         response?: {

@@ -30,7 +30,7 @@ async function BlogDetail({ params }: BlogDetailProps) {
   }
 
   return (
-    <div className="max-w-screen-md mx-auto mt-15">
+    <div className="max-w-screen-md mx-auto m-10">
       <h1 className="text-2xl font-bold mb-8">{post.title}</h1>
       <p className="mb-4">{post.briefText}</p>
       <p className="mb-8">{post.text}</p>
