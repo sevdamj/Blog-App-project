@@ -1,13 +1,12 @@
 import axios from "axios";
 
-const app = axios.create({
+const http = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   withCredentials: true,
 });
 
-// فقط در Client Side اجرا بشه
 if (typeof window !== 'undefined') {
-  app.interceptors.response.use(
+  http.interceptors.response.use(
     (res) => res,
     async (err) => {
       const originalConfig = err.config;
@@ -20,9 +19,8 @@ if (typeof window !== 'undefined') {
             `${process.env.NEXT_PUBLIC_BASE_URL}/user/refresh-token`,
             { withCredentials: true }
           );
-          return app(originalConfig);
+          return http(originalConfig);
         } catch (refreshError) {
-          // می‌توانید به صفحه لاگین هدایت کنید
           if (typeof window !== 'undefined') {
             window.location.href = '/signin';
           }
@@ -34,13 +32,5 @@ if (typeof window !== 'undefined') {
     }
   );
 }
-
-const http = {
-  get: app.get,
-  post: app.post,
-  put: app.put,
-  patch: app.patch,
-  delete: app.delete,
-};
 
 export default http;
