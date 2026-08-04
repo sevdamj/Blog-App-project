@@ -14,68 +14,73 @@ function getFullImageUrl(url?: string): string | undefined {
 }
 
 // ==================== API Functions ====================
-export async function getPostBySlug(slug: string): Promise<Post | undefined> {
-  const res = await fetch(`${BASE_URL}/post/slug/${slug}`, { cache: "no-store" });
-  const { data } = await res.json();
-  const { post } = data || {};
-  
-  if (post?.coverImageUrl) {
-    post.coverImageUrl = getFullImageUrl(post.coverImageUrl);
-  }
-  
-  return post;
+export async function getPostBySlug(
+  slug: string,
+  options?: AxiosRequestConfig
+) {
+  return http.get(`/post/slug/${slug}`, options).then(({ data }) => {
+    const post = data.data?.post;
+
+    if (post?.coverImageUrl) {
+      post.coverImageUrl = getFullImageUrl(post.coverImageUrl);
+    }
+
+    return post as Post | undefined;
+  });
 }
 
 export async function getPosts(
   queries?: string,
-  options?: RequestInit
-): Promise<{ posts: Post[] }> {
-  const url = `${BASE_URL}/post/list${queries ? `?${queries}` : ""}`;
-  const res = await fetch(url, { ...options, cache: "no-store" });
-  const { data } = await res.json();
-  const { posts = [] } = data || {};
-  
-  const fixedPosts = posts.map((post: Post) => ({
-    ...post,
-    coverImageUrl: getFullImageUrl(post.coverImageUrl),
-  }));
-  
-  return { posts: fixedPosts };
+  options?: AxiosRequestConfig
+) {
+  return http
+    .get(`/post/list${queries ? `?${queries}` : ""}`, options)
+    .then(({ data }) => {
+      const posts = data.data?.posts ?? [];
+
+      const fixedPosts = posts.map((post: Post) => ({
+        ...post,
+        coverImageUrl: getFullImageUrl(post.coverImageUrl),
+      }));
+
+      return { posts: fixedPosts };
+    });
 }
 
-// ==================== API Functions (با http برای احراز هویت) ====================
 export async function getPostById(id: PostId, options?: AxiosRequestConfig) {
-  const { data } = await http.get(`/post/${id}`, options);
-  const post = data.data;
-  
-  if (post?.coverImageUrl) {
-    post.coverImageUrl = getFullImageUrl(post.coverImageUrl);
-  }
-  
-  return post;
+  return http.get(`/post/${id}`, options).then(({ data }) => {
+    const post = data.data;
+
+    if (post?.coverImageUrl) {
+      post.coverImageUrl = getFullImageUrl(post.coverImageUrl);
+    }
+
+    return post;
+  });
 }
 
 export async function createPostApi(data: FormData) {
-  const { data: resData } = await http.post(`/post/create`, data);
-  return resData.data;
+  return http.post(`/post/create`, data).then(({ data }) => data.data);
 }
 
 export async function editPostApi(id: PostId, data: FormData) {
-  const { data: resData } = await http.patch(`/post/update/${id}`, data);
-  return resData.data;
+  return http.patch(`/post/update/${id}`, data).then(({ data }) => data.data);
 }
 
-export async function deletePostApi({ id, options }: { id: PostId; options?: AxiosRequestConfig }) {
-  const { data } = await http.delete(`/post/remove/${id}`, options);
-  return data.data;
+export async function deletePostApi({
+  id,
+  options,
+}: {
+  id: PostId;
+  options?: AxiosRequestConfig;
+}) {
+  return http.delete(`/post/remove/${id}`, options).then(({ data }) => data.data);
 }
 
 export async function likePostApi(id: PostId) {
-  const { data } = await http.post(`/post/like/${id}`);
-  return data.data;
+  return http.post(`/post/like/${id}`).then(({ data }) => data.data);
 }
 
 export async function bookmarkPostApi(id: PostId) {
-  const { data } = await http.post(`/post/bookmark/${id}`);
-  return data.data;
+  return http.post(`/post/bookmark/${id}`).then(({ data }) => data.data);
 }

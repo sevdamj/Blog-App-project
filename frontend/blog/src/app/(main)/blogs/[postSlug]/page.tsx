@@ -30,10 +30,10 @@ async function BlogDetail({ params }: BlogDetailProps) {
   }
 
   return (
-    <div className="max-w-screen-md mx-auto m-10">
+    <div className="max-w-screen-lg mx-auto p-5 mt-10">
       <h1 className="text-2xl font-bold mb-8">{post.title}</h1>
-      <p className="mb-4">{post.briefText}</p>
-      <p className="mb-8">{post.text}</p>
+      <p className="mb-4 text-xl font-bold">{post.briefText}</p>
+      <p className="mb-8 text-lg leading-loose">{post.text}</p>
       <div className="relative overflow-hidden mb-10">
         <CoverImage  slug={post.slug} coverImageUrl={post.coverImageUrl || ""}/>
       </div>
