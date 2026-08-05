@@ -1,24 +1,41 @@
 import { cookies } from "next/headers";
 import Empty from "@/ui/Empty";
 import Table from "@/ui/Table";
-import { getCategoryApi } from "@/features/category/api/categoryServices";
+// import { getCategoryApi } from "@/features/category/api/categoryServices";
 import CetegoryRow from "./CetegoryRow";
 import { Category } from "../types/category";
+import http from "@/services/httpService";
+
 
 async function CategoryTable() {
   let categories: Category[] = [];
+  const cookieStore = await cookies();
+  const cookieHeader = cookieStore.toString();
 
   try {
-    const cookieStore = await cookies();
-    const fetchedCategories = (await getCategoryApi({
+    const response = await http.get("/category/list", {
       headers: {
-        Cookie: cookieStore.toString(),
+        Cookie: cookieHeader,
       },
-    })) as Category[];
-    categories = fetchedCategories || [];
+    });
+    categories = response.data.data.categories || [];
   } catch (error) {
     console.error("Error fetching categories:", error);
   }
+
+
+  //   try {
+  //   const cookieStore = await cookies();
+  //   const fetchedCategories = (await getCategoryApi({
+  //     headers: {
+  //       Cookie: cookieStore.toString(),
+  //     },
+  //   })) as Category[];
+  //   categories = fetchedCategories || [];
+  // } catch (error) {
+  //   console.error("Error fetching categories:", error);
+  // }
+
 
   if (!categories.length) return <Empty resourceName="دسته بندی ای" />;
 
