@@ -30,7 +30,8 @@ export default function LandingPage() {
   ];
 
   return (
-    <section className="relative py-22 md:py-32 px-8 overflow-hidden transition-colors duration-500 flex flex-col items-center justify-center gap-y-6">
+    // <section className="relative py-22 md:py-32 px-8 overflow-hidden transition-colors duration-500 flex flex-col items-center justify-center gap-y-6">
+     <section className="relative h-full px-8 overflow-hidden transition-colors duration-500 flex flex-col items-center justify-center gap-y-5">
       <div className="flex flex-col text-center gap-y-4 relative z-10">
         <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight text-foreground">
           اپلیکیشن مدیریت
