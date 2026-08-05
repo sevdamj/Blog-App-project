@@ -102,7 +102,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center gap-x-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-5">
             <p className="text-surface/60 text-xs md:text-sm text-center md:text-right">
               تمامی حقوق مادی و معنوی این وب‌سایت متعلق به{" "}
               <span className="text-primary-300 font-semibold">بلاگ اپ</span>{" "}
