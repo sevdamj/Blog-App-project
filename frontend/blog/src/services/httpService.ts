@@ -3,7 +3,7 @@ import axios from "axios";
 const http = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   withCredentials: true,
-});
+})
 
 if (typeof window !== 'undefined') {
   http.interceptors.response.use(
@@ -33,4 +33,8 @@ if (typeof window !== 'undefined') {
   );
 }
 
+<<<<<<< Updated upstream
 export default http;
+=======
+export default http;
+>>>>>>> Stashed changes
