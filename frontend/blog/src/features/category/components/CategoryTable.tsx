@@ -5,6 +5,7 @@ import Table from "@/ui/Table";
 import CetegoryRow from "./CetegoryRow";
 import { Category } from "../types/category";
 import http from "@/services/httpService";
+export const dynamic = "force-dynamic";
 
 
 async function CategoryTable() {
