@@ -1,38 +1,18 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
 import Empty from "@/ui/Empty";
 import Table from "@/ui/Table";
 import UserRow from "./UserRow";
 import { getAllUsersApi } from "@/features/auth/api/authService";
-import { headers } from "next/headers";
-import { User } from "@/features/auth/types/user";
 
-async function UsersTable() {
-  let users: User[] = [];
-  let error = null;
+function UsersTable() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["users"],
+    queryFn: getAllUsersApi,
+  });
 
-  try {
-    const headersList = await headers();
-    const cookieHeader = headersList.get("cookie") || "";
-
-    const response = await getAllUsersApi({
-      headers: {
-        Cookie: cookieHeader,
-      },
-    });
-    
-    users = response.users || [];
-  }
-  //  catch (err) {
-  //   console.error("خطا در دریافت کاربران:", err);
-  //   error = err;
-  //   users = [];
-  // }
-  catch (err: any) {
-  console.error("Status:", err?.response?.status);
-  console.error("Data:", err?.response?.data);
-  console.error("Message:", err?.message);
-  error = err;
-  users = [];
-}
+  if (isLoading) return <div className="text-center py-8">در حال بارگذاری...</div>;
 
   if (error) {
     return (
@@ -42,9 +22,8 @@ async function UsersTable() {
     );
   }
 
-  if (!users || users.length === 0) {
-    return <Empty resourceName="کاربری" />;
-  }
+  const users = data?.users || [];
+  if (!users.length) return <Empty resourceName="کاربری" />;
 
   return (
     <Table>

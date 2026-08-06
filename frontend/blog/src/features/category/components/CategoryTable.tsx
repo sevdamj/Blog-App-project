@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import Empty from "@/ui/Empty";
 import Table from "@/ui/Table";
 import { getCategoryApi } from "@/features/category/api/categoryServices";
@@ -8,11 +9,17 @@ async function CategoryTable() {
   let categories: Category[] = [];
 
   try {
-    const fetchedCategories = (await getCategoryApi()) as Category[];
+    const cookieStore = await cookies();
+    const fetchedCategories = (await getCategoryApi({
+      headers: {
+        Cookie: cookieStore.toString(),
+      },
+    })) as Category[];
     categories = fetchedCategories || [];
   } catch (error) {
     console.error("Error fetching categories:", error);
   }
+
   if (!categories.length) return <Empty resourceName="دسته بندی ای" />;
 
   return (
