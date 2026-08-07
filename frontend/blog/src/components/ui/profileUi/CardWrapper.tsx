@@ -1,5 +1,10 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { MessageCircle, Users, FileText } from "lucide-react";
-import { fetchCardData } from "@/services/data";
+import { getAllUsersApi } from "@/features/auth/api/authService";
+import { getCommentsApi } from "@/features/comments/api/commentService";
+import http from "@/services/httpService";
 
 type CardType = "users" | "posts" | "comments";
 
@@ -31,19 +36,37 @@ function Card({ title, value, type }: CardProps) {
   );
 }
 
-async function CardWrapper() {
-  let numberOfUsers = 0;
-  let numberOfPosts = 0;
-  let numberOfComments = 0;
+function CardWrapper() {
+  const [numberOfUsers, setNumberOfUsers] = useState(0);
+  const [numberOfPosts, setNumberOfPosts] = useState(0);
+  const [numberOfComments, setNumberOfComments] = useState(0);
 
-  try {
-    const data = await fetchCardData();
-    numberOfUsers = data?.numberOfUsers ?? 0;
-    numberOfPosts = data?.numberOfPosts ?? 0;
-    numberOfComments = data?.numberOfComments ?? 0;
-  } catch (error) {
-    console.error("Error in CardWrapper:", error);
-  }
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const usersData = await getAllUsersApi();
+        setNumberOfUsers(usersData.users?.length ?? 0);
+      } catch (error) {
+        console.error("خطا در گرفتن کاربران:", error);
+      }
+
+      try {
+        const postsRes = await http.get("/post/list");
+        setNumberOfPosts(postsRes.data.data.posts?.length ?? 0);
+      } catch (error) {
+        console.error("خطا در گرفتن پست‌ها:", error);
+      }
+
+      try {
+        const commentsData = await getCommentsApi();
+        setNumberOfComments(commentsData.comments?.length ?? 0);
+      } catch (error) {
+        console.error("خطا در گرفتن کامنت‌ها:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <div className="grid gap-6 mb-8 md:grid-cols-3">
