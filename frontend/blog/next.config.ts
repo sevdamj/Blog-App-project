@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["localhost"],
     remotePatterns: [
       {
         protocol: "http",
@@ -10,9 +9,14 @@ const nextConfig: NextConfig = {
         port: "5000",
         pathname: "/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "blog-app-project-cvfy.onrender.com",
+        pathname: "/uploads/**",
+      },
     ],
   },
-    experimental: {
+  experimental: {
     staleTimes: {
       dynamic: 0,
       static: 0,
