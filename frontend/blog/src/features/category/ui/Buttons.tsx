@@ -47,13 +47,14 @@ export function DeleteCategory({ category }: DeleteCategoryProps) {
   const { isDeleting, deleteCategory } = useDeleteCategory();
   const router = useRouter();
 
-  const handleDelete = () => {
+ const handleDelete = (e: React.MouseEvent) => {
+    e.preventDefault();
     deleteCategory(
       { id: category._id },
       {
         onSuccess: () => {
           setIsOpen(false);
-           router.refresh();
+          router.refresh();
         },
       }
     );
