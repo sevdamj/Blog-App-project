@@ -14,11 +14,9 @@ function CetegoryRow({ category, index }: CetegoryRowProps) {
     <Table.Row>
       <td className="p-4">{toPersianDigits(index)}</td>
       <td className="p-4">{title}</td>
-      <td className="p-4">
-        {truncateText(description, 30)}
-      </td>
+      <td className="p-4">{truncateText(description, 30)}</td>
       <td className="p-4">{createdAt ? toLocalDateShort(createdAt) : "-"}</td>
- <td  className="p-4 space-x-2 md:block flex items-center">
+      <td className="p-4 space-x-2 md:block flex items-center">
         <EditCategory id={category._id} />
         <DeleteCategory category={category} />
       </td>

@@ -53,6 +53,7 @@ export function DeleteCategory({ category }: DeleteCategoryProps) {
       {
         onSuccess: () => {
           setIsOpen(false);
+           router.refresh();
         },
       }
     );
