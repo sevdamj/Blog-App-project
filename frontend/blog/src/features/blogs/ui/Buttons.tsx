@@ -32,6 +32,7 @@ export function DeletePost({ post }: DeletePostProps) {
   const router = useRouter();
 
   const handleDelete = () => {
+    e.preventDefault();
     deletePost(
       { id: post._id },
       {
